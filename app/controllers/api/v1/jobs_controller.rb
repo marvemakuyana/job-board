@@ -7,7 +7,7 @@ module Api::V1
       end
   
       def show
-        @jobs = Job.find(params[:id])
+        @jobs =  Job.find(params[:id]) || Job.find_by(ref: params[:ref])  
         render json: @jobs
       end
   
@@ -42,6 +42,8 @@ module Api::V1
             .require(:job)
             .permit(:company, :position, :description)
       end
+
+    
   
     end
   end
